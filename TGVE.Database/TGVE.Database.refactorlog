@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="1e18fac6-e883-4b5d-9b7d-1bcb98a510e5" ChangeDateTime="11/25/2018 02:37:01">
+    <Property Name="ElementName" Value="[dbo].[Tours].[SessionStartTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tours]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ToursStartTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c6a6c137-8840-4214-b4e1-d4ab8b145422" ChangeDateTime="11/25/2018 02:37:06">
+    <Property Name="ElementName" Value="[dbo].[Tours].[SessionEndTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tours]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TourEndTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cc4d1a78-7435-422f-a4ad-ef5e1d6c3e50" ChangeDateTime="11/25/2018 02:37:08">
+    <Property Name="ElementName" Value="[dbo].[Tours].[ToursStartTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tours]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TourStartTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3b0f196d-a13e-4697-a0d0-c231e927b4d9" ChangeDateTime="11/25/2018 02:37:22">
+    <Property Name="ElementName" Value="[dbo].[Tours].[TeacherName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tours]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Area" />
+  </Operation>
+</Operations>
