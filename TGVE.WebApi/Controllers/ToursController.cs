@@ -50,6 +50,11 @@ namespace TGVE.WebApi.Controllers
                 return BadRequest();
             }
 
+            if (!ValidTour(tour))
+            {
+                return BadRequest();
+            }
+
             db.Entry(tour).State = EntityState.Modified;
 
             try
@@ -78,6 +83,11 @@ namespace TGVE.WebApi.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (!ValidTour(tour))
+            {
+                return BadRequest();
             }
 
             db.Tours.Add(tour);
@@ -114,6 +124,38 @@ namespace TGVE.WebApi.Controllers
         private bool TourExists(int id)
         {
             return db.Tours.Count(e => e.Id == id) > 0;
+        }
+
+        private bool ValidTour(Tour tour)
+        {
+            try
+            {
+                if (DateTime.Now > tour.TourStartTime || DateTime.Now > tour.TourEndTime || (tour.TourStartTime >= tour.TourEndTime))
+                {
+                    return false;
+                }
+
+                if (tour.Name.Length == 0 || tour.Name.Length > 1000)
+                {
+                    return false;
+                }
+
+                if (tour.Description.Length == 0 || tour.Description.Length > 100000)
+                {
+                    return false;
+                }
+                
+                if (tour.Location.Length == 0 || tour.Location.Length > 1000)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

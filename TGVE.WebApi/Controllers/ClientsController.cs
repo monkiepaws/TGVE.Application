@@ -6,6 +6,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -50,6 +52,11 @@ namespace TGVE.WebApi.Controllers
                 return BadRequest();
             }
 
+            if (!ValidClient(client))
+            {
+                return BadRequest();
+            }
+
             db.Entry(client).State = EntityState.Modified;
 
             try
@@ -78,6 +85,11 @@ namespace TGVE.WebApi.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (!ValidClient(client))
+            {
+                return BadRequest();
             }
 
             db.Clients.Add(client);
@@ -114,6 +126,43 @@ namespace TGVE.WebApi.Controllers
         private bool ClientExists(int id)
         {
             return db.Clients.Count(e => e.Id == id) > 0;
+        }
+
+        private bool ValidClient(Client client)
+        {
+            try
+            {
+                if (DateTime.Now <= client.DateOfBirth)
+                {
+                    return false;
+                }
+
+                Regex nameRegex = new Regex("^[a-zA-Z]*$");
+
+                if (!nameRegex.IsMatch(client.FirstName) || !nameRegex.IsMatch(client.LastName))
+                {
+                    return false;
+                }
+
+                Regex phoneRegex = new Regex(@"\+\d* \d{3}\ *\d{3} \d{4}");
+
+                if (!phoneRegex.IsMatch(client.PhoneNumber))
+                {
+                    return false;
+                }
+
+                if (client.Address.Length == 0 || client.Address.Length > 1000)
+                {
+                    return false;
+                }
+
+                MailAddress email = new MailAddress(client.Email);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }
